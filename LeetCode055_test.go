@@ -6,40 +6,32 @@ import (
 )
 
 /**
-序号：003
-标题：无重复字符的最长字串
+序号：055
+标题：跳跃游戏
 日期：2022/06/20
 类型：滑动窗口/中等
 */
-func Test003(t *testing.T) {
-	var s = "pwwkew"
-	fmt.Println(lengthOfLongestSubstring(s))
+func Test055(t *testing.T) {
+	nums := []int{2, 3, 0, 0, 4}
+	fmt.Println(canJump(nums))
 }
 
-func lengthOfLongestSubstring(s string) int {
-	// 哈希集合，记录每个字符是否出现过
-	m := map[byte]int{}
-	n := len(s)
-	// 右指针，初始值为 -1，相当于我们在字符串的左边界的左侧，还没有开始移动
-	rk, ans := -1, 0
-	for i := 0; i < n; i++ {
-		if i != 0 {
-			// 左指针向右移动一格，移除一个字符
-			delete(m, s[i-1])
+/**
+如果所有元素都>=1，则可直接判断为true。因为我可以一次走一步，像一只乌龟一样走到终点。
+如果有元素为0，可以把0当作“坑”，为了不掉进坑里，我需要判断坑之前的位置，是否允许我一次跳多格，像一只兔子一样越过这个坑，如果可以越过这个坑，则继续往终点走，
+并继续判断未来的其他坑。如果我永远都无法越过某一个坑，则返回false，我将不可能到达终点。
+*/
+func canJump(nums []int) bool {
+	n := 1
+	for i := len(nums) - 2; i >= 0; i-- {
+		if nums[i] >= n {
+			n = 1
+		} else {
+			n++
 		}
-		for rk+1 < n && m[s[rk+1]] == 0 {
-			// 不断地移动右指针
-			m[s[rk+1]]++
-			rk++
+		if i == 0 && n > 1 {
+			return false
 		}
-		// 第 i 到 rk 个字符是一个极长的无重复字符子串
-		ans = max(ans, rk-i+1)
 	}
-	return ans
-}
-func max(x, y int) int {
-	if x < y {
-		return y
-	}
-	return x
+	return true
 }

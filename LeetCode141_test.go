@@ -20,8 +20,6 @@ func Test141(t *testing.T) {
 //	Next *ListNode
 //}
 
-//使用hash表
-
 //使用快慢指针
 func hasCycle(head *ListNode) bool {
 	if head == nil || head.Next == nil {

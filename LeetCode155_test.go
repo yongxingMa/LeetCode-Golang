@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"testing"
 )
 
@@ -32,12 +31,12 @@ type MinStack struct {
 	minStack []int
 }
 
-func Constructor() MinStack {
-	return MinStack{
-		stack:    []int{},
-		minStack: []int{math.MaxInt64},
-	}
-}
+//func Constructor() MinStack {
+//	return MinStack{
+//		stack:    []int{},
+//		minStack: []int{math.MaxInt64},
+//	}
+//}
 
 func (this *MinStack) Push(val int) {
 	this.stack = append(this.stack, val)

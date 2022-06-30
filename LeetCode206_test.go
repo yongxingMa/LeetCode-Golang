@@ -34,3 +34,16 @@ func reverseList(head *ListNode) *ListNode {
 	}
 	return prev
 }
+
+//func reverseList(head *ListNode) *ListNode {
+//
+//	var prev *ListNode
+//	cur := head
+//	if cur != nil {
+//		next := cur.Next
+//		cur.Next = prev
+//		prev = cur
+//		cur = next
+//	}
+//
+//}

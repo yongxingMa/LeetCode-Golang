@@ -32,18 +32,21 @@ func Constructor() MyQueue {
 
 }
 
+//队列添加元素，只从输入栈输入
 func (q *MyQueue) Push(x int) {
 	//往输入栈添加元素
 	q.inStack = append(q.inStack, x)
 
 }
 
+//队列弹出元素
 func (q *MyQueue) Pop() int {
 	if len(q.outStack) == 0 {
 		q.in2out()
 	}
 	//输出栈的最后一个弹出
 	x := q.outStack[len(q.outStack)-1]
+	//删掉最后一个元素
 	q.outStack = q.outStack[:len(q.outStack)-1]
 	return x
 }
@@ -53,7 +56,7 @@ func (q *MyQueue) in2out() {
 	for len(q.inStack) > 0 {
 		//把输入栈最后一个，放到输出栈
 		q.outStack = append(q.outStack, q.inStack[len(q.inStack)-1])
-		//输入栈长度+1
+		//输入栈的最后一个删掉
 		q.inStack = q.inStack[:len(q.inStack)-1]
 	}
 }
