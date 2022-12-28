@@ -11,7 +11,7 @@ import (
 日期：2022/06/02
 类型：二分查找
 */
-func Test33(t *testing.T) {
+func Test033(t *testing.T) {
 	var height = []int{4, 5, 6, 7, 0, 1, 2}
 	fmt.Println(search33(height, 3))
 }

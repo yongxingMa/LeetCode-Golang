@@ -10,7 +10,7 @@ import (
 标题：搜索插入位置
 日期：2022/06/02
 */
-func Test35(t *testing.T) {
+func Test035(t *testing.T) {
 	var height = []int{1, 3, 5, 6}
 	fmt.Println(searchInsert(height, 0))
 }
