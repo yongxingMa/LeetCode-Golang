@@ -22,28 +22,14 @@ type ListNode struct {
 
 func reverseList(head *ListNode) *ListNode {
 	var prev *ListNode
-	curr := head
-	for curr != nil {
-		next := curr.Next
-		//把1指向null
-		curr.Next = prev
+	for head != nil {
+		next := head.Next
+		//把第一个节点指向null
+		head.Next = prev
 		//移动到当前指针
-		prev = curr
+		prev = head
 		//把当前的向后移动一下
-		curr = next
+		head = next
 	}
 	return prev
 }
-
-//func reverseList(head *ListNode) *ListNode {
-//
-//	var prev *ListNode
-//	cur := head
-//	if cur != nil {
-//		next := cur.Next
-//		cur.Next = prev
-//		prev = cur
-//		cur = next
-//	}
-//
-//}

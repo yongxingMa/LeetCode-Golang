@@ -27,7 +27,7 @@ type MyQueue struct {
 	inStack, outStack []int
 }
 
-func Constructor() MyQueue {
+func Constructor2() MyQueue {
 	return MyQueue{}
 
 }

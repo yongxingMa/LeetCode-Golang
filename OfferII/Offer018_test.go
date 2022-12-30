@@ -14,11 +14,11 @@ import (
 
 func Test018(t *testing.T) {
 	s := "123"
-	fmt.Println(isPalindrome(s))
+	fmt.Println(isPalindrome1(s))
 }
 
 //双指针解法
-func isPalindrome(s string) bool {
+func isPalindrome1(s string) bool {
 	//全部转换为小写
 	s = strings.ToLower(s)
 	left, right := 0, len(s)-1
