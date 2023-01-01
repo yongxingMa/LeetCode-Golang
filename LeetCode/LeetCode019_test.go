@@ -43,8 +43,6 @@ func getLength(head *ListNode) (length int) {
 
 /**
 因此我们可以使用两个指针 slow 和 fast 同时对链表进行遍历，并且 设置 超前 n 个节点。当 fast遍历到链表的末尾时，slow 就恰好处于倒数第 n 个节点。
-
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 */
 //双指针解决
 func removeNthFromEnd(head *ListNode, n int) *ListNode {
@@ -55,11 +53,12 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	for i := 0; i < n; i++ {
 		fast = fast.Next
 	}
+	//当fast=nil时候，slow的下一个就是待删除的节点
 	for fast != nil {
 		slow = slow.Next
 		fast = fast.Next
 	}
-	//删除中间的元素
+	//删除slow的下一个节点
 	slow.Next = slow.Next.Next
 	return dummy.Next
 }
