@@ -22,13 +22,15 @@ func isValid(s string) bool {
 		return false
 	}
 	//定义需要匹配的字符
+	// 遇到左括号
 	pairs := map[byte]byte{')': '(', ']': '[', '}': '{'}
 	stack := []byte{}
 
 	for i := 0; i < len(s); i++ {
-		//大于0表示，存在右边的括号，说明栈里边也有左边的括号，找不到直接返回false，
+		//大于0表示右括号，需要在栈里找左括号，找不到直接返回false，
 		if pairs[s[i]] > 0 {
 			//这里必须在栈顶上找到对应的左括号，不然也是不合法的
+			//stack[len(stack)-1] 表示最后一个
 			if len(stack) == 0 || stack[len(stack)-1] != pairs[s[i]] {
 				return false
 			}
