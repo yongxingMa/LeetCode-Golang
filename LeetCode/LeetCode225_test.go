@@ -16,9 +16,9 @@ type MyStack struct {
 	queue1, queue2 []int
 }
 
-//func Constructor() (s MyStack) {
-//	return
-//}
+func Constructor3() (s MyStack) {
+	return
+}
 
 //一个队列的时候 这么操作
 //func (s *MyStack) Push(x int) {
