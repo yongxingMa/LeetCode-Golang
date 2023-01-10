@@ -9,34 +9,40 @@ package LeetCode
 
 //递归解法
 func inorderTraversal(root *TreeNode) []int {
-	res := []int{}
-	inorder(root, &res)
-	return res
-}
-func inorder(node *TreeNode, res *[]int) {
-	if node != nil {
-		inorder(node.Left, res)
-		*res = append(*res, node.Val)
-		inorder(node.Right, res)
+	var preorder func(*TreeNode)
+	// 统计数组
+	vals := []int{}
+	// 函数定义
+	preorder = func(node *TreeNode) {
+		//递归终止条件
+		if node == nil {
+			return
+		}
+		//遍历左节点
+		preorder(node.Left)
+		//中序遍历，记录结果
+		vals = append(vals, node.Val)
+		//遍历右节点
+		preorder(node.Right)
+
 	}
+	//函数调用
+	preorder(root)
+	return vals
 }
 
-//迭代用栈实现
-//func inorderTraversal2(root *TreeNode) (res []int) {
-//	stack := []*TreeNode{}
-//	for root != nil || len(stack) > 0 {
-//		//节点不为空，先入栈
-//		for root != nil {
-//			stack = append(stack, root)
-//			//寻找左子树
-//			root = root.Left
-//		}
-//		//栈顶弹出来
-//		root = stack[len(stack)-1]
-//		//删掉栈顶的数
-//		stack = stack[:len(stack)-1]
-//		res = append(res, root.Val)
-//		root = root.Right
-//	}
-//	return
-//}
+//迭代实现
+func inorderTraversal2(root *TreeNode) (res []int) {
+	stack := []*TreeNode{}
+	for root != nil || len(stack) > 0 {
+		for root != nil {
+			stack = append(stack, root)
+			root = root.Left
+		}
+		root = stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		res = append(res, root.Val)
+		root = root.Right
+	}
+	return
+}
