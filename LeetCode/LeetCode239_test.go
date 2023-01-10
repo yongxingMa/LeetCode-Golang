@@ -1,6 +1,7 @@
 package LeetCode
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -11,8 +12,8 @@ import (
 类型：双端队列
 */
 func Test239(t *testing.T) {
-	//var s = "pwwkew"
-	//fmt.Println(lengthOfLongestSubstring(s))
+	nums := []int{1, 3, -1, -3, 5, 3, 6, 7}
+	fmt.Println(maxSlidingWindow(nums, 3))
 }
 
 func maxSlidingWindow(nums []int, k int) []int {
