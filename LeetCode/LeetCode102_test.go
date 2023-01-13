@@ -22,13 +22,23 @@ func levelOrder(root *TreeNode) [][]int {
 		if root == nil {
 			return
 		}
-		//判断当前层，初始化二维数组
+		/**
+		[]
+		[[]] 拼接空数组
+		[[3]] 拼接节点Val
+		[[3] []] 拼接空数组
+		[[3] [9]] 拼接节点Val
+		[[3] [9 20]] 拼接节点Val
+		[[3] [9 20] []] 拼接空数组
+		[[3] [9 20] [15]] 拼接节点Val
+		*/
+		//拼接空的数组
 		if len(arr) == depth {
 			arr = append(arr, []int{})
 		}
-		//记录第几层的元素值
+		//拼接节点Val
 		arr[depth] = append(arr[depth], root.Val)
-
+		//下一层
 		order(root.Left, depth+1)
 		order(root.Right, depth+1)
 	}

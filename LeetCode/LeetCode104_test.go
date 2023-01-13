@@ -7,7 +7,7 @@ package LeetCode
 类型：
 */
 
-//递归==深度优先搜索DFS
+//深度优先搜索DFS
 func maxDepth(root *TreeNode) int {
 	if root == nil {
 		return 0
