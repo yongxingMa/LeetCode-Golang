@@ -7,7 +7,8 @@ package LeetCode
 类型：
 */
 
-//深度优先搜索DFS
+// 深度优先搜索DFS
+// 后序遍历，先求它的左子树的深度，再求右子树的深度，最后取左右深度最大的数值 再 + 1
 func maxDepth(root *TreeNode) int {
 	if root == nil {
 		return 0

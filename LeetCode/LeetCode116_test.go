@@ -28,12 +28,12 @@ func Test116(t *testing.T) {
 //)
 
 //完美二叉树
-//type Node struct {
-//	val   int
-//	Left  Node
-//	Right Node
-//	Next  Node
-//}
+type Node2 struct {
+	val   int
+	Left  *Node2
+	Right *Node2
+	Next  *Node2
+}
 
 /**
 将二叉树的每一层节点都连接起来形成一个链表，因此直观的做法我们可以对二叉树进行层次遍历，在层次遍历的过程中将我们将二叉树每一层的节点拿出来遍历并连接。
@@ -70,3 +70,37 @@ func Test116(t *testing.T) {
 //	// 返回根节点
 //	return root
 //}
+
+//解法二 层序遍历
+//初始状态下，所有 next 指针都被设置为 NULL,所以不需要考虑右节点的情况
+func connect(root *Node2) *Node2 {
+	if root == nil {
+		return root
+	}
+	// 初始化队列同时将第一层节点加入队列中，即根节点
+	queue := []*Node2{root}
+
+	// 循环迭代的是层数
+	for len(queue) > 0 {
+		tmp := queue
+		queue = nil
+
+		// 遍历这一层的所有节点
+		for i, node := range tmp {
+			// 连接
+			if i+1 < len(tmp) {
+				node.Next = tmp[i+1]
+			}
+
+			// 拓展下一层节点
+			if node.Left != nil {
+				queue = append(queue, node.Left)
+			}
+			if node.Right != nil {
+				queue = append(queue, node.Right)
+			}
+		}
+	}
+	// 返回根节点
+	return root
+}

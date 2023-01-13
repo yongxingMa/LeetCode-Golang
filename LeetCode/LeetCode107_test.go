@@ -19,6 +19,7 @@ func levelOrderBottom(root *TreeNode) [][]int {
 		if root == nil {
 			return
 		}
+		//长度等于深度，添加空数组
 		if len(arr) == depth {
 			arr = append(arr, []int{})
 		}
