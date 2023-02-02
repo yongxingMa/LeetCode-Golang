@@ -21,8 +21,9 @@ func sumOfLeftLeaves(root *TreeNode) int {
 	}
 	leftValue := sumOfLeftLeaves(root.Left) // 左
 
+	//判断条件，找到左叶子树
 	if root.Left != nil && root.Left.Left == nil && root.Left.Right == nil {
-		leftValue = root.Left.Val // 中
+		leftValue = root.Left.Val
 	}
 
 	rightValue := sumOfLeftLeaves(root.Right) // 右
