@@ -1,8 +1,9 @@
 package LeetCode
 
 import (
-	"strconv"
+	"fmt"
 	"strings"
+	"testing"
 )
 
 /**
@@ -12,56 +13,44 @@ import (
 类型：
 */
 
-/**
+/*
+*
 void push(int x) 将元素 x 推到队列的末尾
 int pop() 从队列的开头移除并返回元素
 int peek() 返回队列开头的元素
 boolean empty() 如果队列为空，返回 true ；否则，返回 false
 */
+func Test394(t *testing.T) {
+	ransomNote := "100[leetcode]"
+	fmt.Println(decodeString(ransomNote))
+}
 
-//这个题还是有点难度的
+// 递归解法
 func decodeString(s string) string {
-	stk := []string{}
-	ptr := 0
-	for ptr < len(s) {
-		cur := s[ptr]
-		if cur >= '0' && cur <= '9' {
-			digits := getDigits(s, &ptr)
-			stk = append(stk, digits)
-		} else if (cur >= 'a' && cur <= 'z' || cur >= 'A' && cur <= 'Z') || cur == '[' {
-			stk = append(stk, string(cur))
-			ptr++
+	numStack := []int{}
+	strStack := []string{}
+	num := 0
+	result := ""
+	for i := 0; i < len(s); i++ {
+		if s[i] >= '0' && s[i] < '9' {
+			// 将字符串转换为整数类型
+			//n, _ := strconv.Atoi(string(s[i]))
+			n := int(s[i] - '0')
+			num = num*10 + n
+		} else if s[i] == '[' {
+			strStack = append(strStack, result)
+			result = ""
+			numStack = append(numStack, num)
+			num = 0
+		} else if s[i] == ']' {
+			count := numStack[len(numStack)-1]
+			numStack = numStack[:len(numStack)-1]
+			str := strStack[len(strStack)-1]
+			strStack = strStack[:len(strStack)-1]
+			result = str + strings.Repeat(result, count)
 		} else {
-			ptr++
-			sub := []string{}
-			for stk[len(stk)-1] != "[" {
-				sub = append(sub, stk[len(stk)-1])
-				stk = stk[:len(stk)-1]
-			}
-			for i := 0; i < len(sub)/2; i++ {
-				sub[i], sub[len(sub)-i-1] = sub[len(sub)-i-1], sub[i]
-			}
-			stk = stk[:len(stk)-1]
-			repTime, _ := strconv.Atoi(stk[len(stk)-1])
-			stk = stk[:len(stk)-1]
-			t := strings.Repeat(getString(sub), repTime)
-			stk = append(stk, t)
+			result += string(s[i])
 		}
 	}
-	return getString(stk)
-}
-func getDigits(s string, ptr *int) string {
-	ret := ""
-	for ; s[*ptr] >= '0' && s[*ptr] <= '9'; *ptr++ {
-		ret += string(s[*ptr])
-	}
-	return ret
-}
-
-func getString(v []string) string {
-	ret := ""
-	for _, s := range v {
-		ret += s
-	}
-	return ret
+	return result
 }

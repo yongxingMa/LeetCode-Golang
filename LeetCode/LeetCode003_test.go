@@ -5,7 +5,8 @@ import (
 	"testing"
 )
 
-/**
+/*
+*
 序号：003
 标题：无重复字符的最长字串
 日期：2022/06/20
@@ -18,22 +19,22 @@ func Test003(t *testing.T) {
 
 func lengthOfLongestSubstring(s string) int {
 	// 哈希集合，记录每个字符是否出现过
-	m := map[byte]int{}
-	n := len(s)
+	hashmap := map[byte]int{}
 	// 右指针，初始值为 -1，相当于我们在字符串的左边界的左侧，还没有开始移动
-	rk, ans := -1, 0
-	for i := 0; i < n; i++ {
+	right, ans := -1, 0
+	for i := 0; i < len(s); i++ {
+		// 当i>0,左指针开始右移
 		if i != 0 {
-			// 左指针向右移动一格，移除一个字符
-			delete(m, s[i-1])
+			// 左指针向右移动一格，移除前边的一个字符
+			delete(hashmap, s[i-1])
 		}
-		for rk+1 < n && m[s[rk+1]] == 0 {
-			// 不断地移动右指针
-			m[s[rk+1]]++
-			rk++
+		// 判断右边的数字是不是满足条件，是的话继续右移
+		for right+1 < len(s) && hashmap[s[right+1]] == 0 {
+			// 记录加入的值
+			hashmap[s[right+1]] = 1
+			right++
 		}
-		// 第 i 到 rk 个字符是一个极长的无重复字符子串
-		ans = max(ans, rk-i+1)
+		ans = max(ans, right-i+1)
 	}
 	return ans
 }

@@ -5,7 +5,8 @@ import (
 	"testing"
 )
 
-/**
+/*
+*
 序号：020
 标题：有效的括号
 日期：2022/06/19
@@ -41,5 +42,28 @@ func isValid(s string) bool {
 		}
 	}
 	//最后stack中如果有值，说明有没有配对的
+	return len(stack) == 0
+}
+
+func isValid2(s string) bool {
+	n := len(s)
+	if n%2 == 1 {
+		return false
+	}
+	hashmap := map[byte]byte{'}': '{', ']': '[', ')': '('}
+	stack := []byte{}
+	for i := 0; i < n; i++ {
+		// 右括号，需要在栈里找左括号，找不到直接返回false，
+		if s[i] == ']' || s[i] == '}' || s[i] == ')' {
+			//这里必须在栈顶上找到对应的左括号，不然也是不合法的
+			if len(stack) == 0 || stack[len(stack)-1] != hashmap[s[i]] {
+				return false
+			}
+			//在栈顶找到后，弹出左侧括号的栈
+			stack = stack[:len(stack)-1]
+		} else {
+			stack = append(stack, s[i])
+		}
+	}
 	return len(stack) == 0
 }

@@ -5,7 +5,8 @@ import (
 	"testing"
 )
 
-/**
+/*
+*
 序号：001
 标题：两数之和
 日期：2022/06/11
@@ -30,4 +31,18 @@ func twoSum001(nums []int, target int) []int {
 
 	}
 	return nil
+}
+
+func twoSum002(nums []int, target int) []int {
+	hashmap := map[int]int{}
+	for i, num := range nums {
+		ano := target - num
+		if p, ok := hashmap[ano]; ok {
+			// 返回存在的下标值和当前的下标指
+			return []int{p, i}
+		} else {
+			hashmap[num] = i
+		}
+	}
+	return []int{}
 }

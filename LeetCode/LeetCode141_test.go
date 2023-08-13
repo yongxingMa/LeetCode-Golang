@@ -4,7 +4,8 @@ import (
 	"testing"
 )
 
-/**
+/*
+*
 序号：141
 标题：环形链表
 日期：2022/06/12
@@ -20,7 +21,7 @@ func Test141(t *testing.T) {
 //	Next *ListNode
 //}
 
-//使用快慢指针
+// 使用快慢指针
 func hasCycle(head *ListNode) bool {
 	if head == nil || head.Next == nil {
 		return false
@@ -31,6 +32,19 @@ func hasCycle(head *ListNode) bool {
 		slow = slow.Next
 		fast = fast.Next.Next
 		if slow == fast {
+			return true
+		}
+	}
+	return false
+}
+
+func hasCycle2(head *ListNode) bool {
+	//slow fast
+	slow, fast := head, head
+	for fast.Next != nil && fast.Next.Next != nil {
+		slow = slow.Next
+		fast = fast.Next.Next
+		for slow == fast {
 			return true
 		}
 	}

@@ -5,9 +5,10 @@ import (
 	"testing"
 )
 
-/**
+/*
+*
 序号：002
-标题：两数之和
+标题：两数相加
 日期：2022/06/11
 类型：/简单
 */
@@ -27,9 +28,10 @@ func Test002(t *testing.T) {
  *     Next *ListNode
  * }
  */
-func addTwoNumbers(l1 *ListNode, l2 *ListNode) (head *ListNode) {
+func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	//定义一个新链表伪指针，用来指向头指针，返回结果
 	var prev *ListNode
+	var head *ListNode
 	//定义一个进位数的指针
 	carry := 0
 	for l1 != nil || l2 != nil {
@@ -62,8 +64,9 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) (head *ListNode) {
 			prev = prev.Next
 		}
 	}
+	//最后判断是不是还有进位
 	if carry > 0 {
 		prev.Next = &ListNode{Val: carry}
 	}
-	return
+	return head
 }

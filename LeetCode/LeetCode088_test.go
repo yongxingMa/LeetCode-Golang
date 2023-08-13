@@ -5,7 +5,8 @@ import (
 	"testing"
 )
 
-/**
+/*
+*
 序号：088
 标题：合并两个有序数组
 日期：2022/06/11
@@ -45,25 +46,20 @@ func Test088(t *testing.T) {
 //	copy(nums1, sorted)
 //}
 
-//逆向双指针
-//空间复杂度是1
+// 逆向双指针
+// 空间复杂度是1
 func merge(nums1 []int, m int, nums2 []int, n int) {
+	// tail代表要填入的位置，一开始是最后一个位置
 	p1, p2, tail := m-1, n-1, m+n-1
-	for ; p1 >= 0 || p2 >= 0; tail-- {
-		var cur int
-		if p1 == -1 {
-			cur = nums2[p2]
-			p2--
-		} else if p2 == -1 {
-			cur = nums1[p1]
-			p1--
-		} else if nums1[p1] > nums2[p2] {
-			cur = nums1[p1]
+	for p2 >= 0 {
+		if p1 >= 0 && nums1[p1] > nums2[p2] {
+			nums1[tail] = nums1[p1]
 			p1--
 		} else {
-			cur = nums2[p2]
+			nums1[tail] = nums2[p2]
 			p2--
 		}
-		nums1[tail] = cur
+		// 待填充位置往前挪一位
+		tail--
 	}
 }
