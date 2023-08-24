@@ -1,6 +1,7 @@
 package LeetCode
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -12,11 +13,11 @@ import (
 */
 func Test343(t *testing.T) {
 	//var nums = []byte{"h","e","l","l","o"}
-	//fmt.Println(sortedSquares(nums))
+	fmt.Println(integerBreak(10))
 }
 
 func integerBreak(n int) int {
-	dp := make([]int, n)
+	dp := make([]int, n+1)
 	for i := 2; i <= n; i++ {
 		curMax := 0
 		for j := 1; j < i; j++ {

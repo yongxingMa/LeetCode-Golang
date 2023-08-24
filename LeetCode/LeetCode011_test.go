@@ -5,9 +5,10 @@ import (
 	"testing"
 )
 
-/**
+/*
+*
 序号：011
-标题：盛最最多水的容器
+标题：盛最多水的容器
 日期：2022/05/30
 */
 func Test011(t *testing.T) {
@@ -16,7 +17,7 @@ func Test011(t *testing.T) {
 }
 
 func maxArea(height []int) int {
-	max, start, end := 0, 0, len(height)-1
+	maxLen, start, end := 0, 0, len(height)-1
 	for start < end {
 		width := end - start
 		high := 0
@@ -28,10 +29,9 @@ func maxArea(height []int) int {
 			end--
 		}
 
-		temp := width * high
-		if temp > max {
-			max = temp
+		if width*high > maxLen {
+			maxLen = width * high
 		}
 	}
-	return max
+	return maxLen
 }

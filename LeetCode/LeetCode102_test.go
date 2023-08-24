@@ -1,14 +1,42 @@
 package LeetCode
 
-import "container/list"
-
 /**
 序号：102
 标题：二叉树层序遍历
 日期：2022/01/11
 */
 
-/**
+// BFS
+func levelOrder6(root *TreeNode) [][]int {
+	res := [][]int{}
+	// 定义含有跟节点的队列
+	arr := []*TreeNode{root}
+
+	if root == nil {
+		return res
+	}
+	for len(arr) > 0 {
+
+		vals := make([]int, len(arr))
+		for i := range arr {
+			node := arr[0]
+			arr = arr[1:]
+			vals[i] = node.Val
+			if node.Left != nil {
+				arr = append(arr, node.Left)
+			}
+			if node.Right != nil {
+				arr = append(arr, node.Right)
+			}
+		}
+		//队列前边的数据出列
+		res = append(res, vals)
+	}
+	return res
+}
+
+/*
+*
 解法一： 二叉树的递归遍历
 */
 func levelOrder(root *TreeNode) [][]int {
@@ -22,16 +50,7 @@ func levelOrder(root *TreeNode) [][]int {
 		if root == nil {
 			return
 		}
-		/**
-		[]
-		[[]] 拼接空数组
-		[[3]] 拼接节点Val
-		[[3] []] 拼接空数组
-		[[3] [9]] 拼接节点Val
-		[[3] [9 20]] 拼接节点Val
-		[[3] [9 20] []] 拼接空数组
-		[[3] [9 20] [15]] 拼接节点Val
-		*/
+
 		//拼接空的数组
 		if len(arr) == depth {
 			arr = append(arr, []int{})
@@ -46,66 +65,4 @@ func levelOrder(root *TreeNode) [][]int {
 	order(root, depth)
 
 	return arr
-}
-
-/**
-解法二： 二叉树的层序遍历
-*/
-func levelOrder2(root *TreeNode) [][]int {
-	res := [][]int{}
-	if root == nil { //防止为空
-		return res
-	}
-	queue := list.New()
-	queue.PushBack(root)
-
-	var tmpArr []int
-
-	for queue.Len() > 0 {
-		length := queue.Len() //保存当前层的长度，然后处理当前层（十分重要，防止添加下层元素影响判断层中元素的个数）
-		for i := 0; i < length; i++ {
-			node := queue.Remove(queue.Front()).(*TreeNode) //出队列
-			if node.Left != nil {
-				queue.PushBack(node.Left)
-			}
-			if node.Right != nil {
-				queue.PushBack(node.Right)
-			}
-			tmpArr = append(tmpArr, node.Val) //将值加入本层切片中
-		}
-		res = append(res, tmpArr) //放入结果集
-		tmpArr = []int{}          //清空层的数据
-	}
-
-	return res
-}
-
-/**
-解法三：叉树的层序遍历：使用切片模拟队列，易理解
-*/
-func levelOrder3(root *TreeNode) (res [][]int) {
-	if root == nil {
-		return
-	}
-
-	curLevel := []*TreeNode{root} // 存放当前层节点
-	for len(curLevel) > 0 {
-		nextLevel := []*TreeNode{} // 准备通过当前层生成下一层
-		vals := []int{}
-
-		for _, node := range curLevel {
-			vals = append(vals, node.Val) // 收集当前层的值
-			// 收集下一层的节点
-			if node.Left != nil {
-				nextLevel = append(nextLevel, node.Left)
-			}
-			if node.Right != nil {
-				nextLevel = append(nextLevel, node.Right)
-			}
-		}
-		res = append(res, vals)
-		curLevel = nextLevel // 将下一层变成当前层
-	}
-
-	return
 }

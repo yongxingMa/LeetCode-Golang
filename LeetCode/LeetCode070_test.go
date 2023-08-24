@@ -5,7 +5,8 @@ import (
 	"testing"
 )
 
-/**
+/*
+*
 序号：70
 标题：爬楼梯
 日期：2022/06/11
@@ -16,13 +17,15 @@ func Test070(t *testing.T) {
 	fmt.Println(climbStairs(8))
 }
 
-/**
+/*
+*
 动态规划可以用递归或迭代的方法去实现
 */
 var store = make(map[int]int)
 
-//递归的解法，自顶向下的，带备忘录记忆
+// 递归的解法，自顶向下的，带备忘录记忆
 func climbStairs(n int) int {
+	// 备忘录
 	if store[n] != 0 {
 		return store[n]
 	}
@@ -35,7 +38,7 @@ func climbStairs(n int) int {
 	}
 }
 
-//动态规划，自底向上
+// 动态规划，自底向上
 func climbStairs2(n int) int {
 	p, q, sum := 0, 0, 1
 	for i := 1; i <= n; i++ {
