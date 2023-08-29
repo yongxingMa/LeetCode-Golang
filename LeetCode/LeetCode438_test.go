@@ -12,8 +12,7 @@ import (
 日期：2023/08/25
 */
 func Test438(t *testing.T) {
-	var height = []int{4, 3, 2, 7, 8, 2, 3, 1}
-	fmt.Println(findDisappearedNumbers(height))
+	fmt.Println(findAnagrams("aa", "bb"))
 }
 
 //双指针构建滑动窗口原理：
@@ -32,12 +31,18 @@ func findAnagrams(s string, p string) (ans []int) {
 		sCount[s[i]-'a']++
 		pCount[ch-'a']++
 	}
+	// 第0位就开始满足条件
 	if sCount == pCount {
 		ans = append(ans, 0)
 	}
+	// 遍历0-6的序列
 	for i, ch := range s[:sLen-pLen] {
+		// 因为首位已经判断过来，将滑动前首位的词频删去
 		sCount[ch-'a']--
+		// 增加右侧窗口词的词频
+		// i的位置再加上p的长度就是右侧窗口
 		sCount[s[i+pLen]-'a']++
+		// 判断滑动后处，是否有异位词
 		if sCount == pCount {
 			ans = append(ans, i+1)
 		}
